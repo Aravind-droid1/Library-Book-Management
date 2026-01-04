@@ -20,7 +20,7 @@ const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5555/books/${id}`)
+      .get(`https://library-book-management-h4hv.onrender.com/books/${id}`)
       .then((response) => {
         const book = response.data.data;
         setTitle(book.title);
