@@ -44,7 +44,7 @@ const EditBook = () => {
 
     setLoading(true);
     axios
-      .put(`http://localhost:5555/books/${id}`, formData)
+      .put(`https://library-book-management-h4hv.onrender.com/books/${id}`, formData)
       .then(() => navigate("/"))
       .catch(() => alert("Failed to update book"))
       .finally(() => setLoading(false));
