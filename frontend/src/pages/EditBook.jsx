@@ -34,21 +34,37 @@ const EditBook = () => {
 
   /* ===== UPDATE BOOK ===== */
   const handleEditBook = () => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("author", author);
-    formData.append("publishedYear", publishedYear);
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("author", author);
+  formData.append("publishedYear", publishedYear);
 
-    if (imageFile) formData.append("image", imageFile);
-    else if (image) formData.append("image", image);
+  if (imageFile) {
+    formData.append("image", imageFile);
+  } else {
+    formData.append("image", image);
+  }
 
-    setLoading(true);
-    axios
-      .put(`https://library-book-management-h4hv.onrender.com/books/${id}`, formData)
-      .then(() => navigate("/"))
-      .catch(() => alert("Failed to update book"))
-      .finally(() => setLoading(false));
-  };
+  setLoading(true);
+
+  axios
+    .put(
+      `https://library-book-management-h4hv.onrender.com/books/${id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then(() => navigate("/"))
+    .catch((err) => {
+      console.error(err);
+      alert("Failed to update book");
+    })
+    .finally(() => setLoading(false));
+};
+
 
   return (
     <div className="max-w-3xl mx-auto">
